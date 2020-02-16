@@ -1,14 +1,14 @@
 openapi: 3.0.1
 info:
   title: Crew Access - basic
-  description: Test openapi spec using swagger inspector+hub
-  version: "0.1"
+  description: 'Test openapi spec using swagger inspector+hub, and manual edits using stoplight.'
+  version: '0.1'
 servers:
-- url: https://192.168.1.52:20602
+  - url: 'https://192.168.1.52:20602'
 paths:
   /access/rs/crew/notification/acknowledge:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Acknowledge all not yet acknowledged notifications. For most airlines this is a required first step before being allowed to use the application.
       requestBody:
         content:
           application/json:
@@ -16,154 +16,1459 @@ paths:
               type: object
               properties: {}
             examples:
-              "0":
+              '0':
                 value: '[{"st":"2018-10-05T06:30:00Z","et":"2018-10-05T13:00:00Z"}]'
       responses:
-        "200":
+        '200':
           description: Auto generated using Swagger Inspector
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200'
               examples:
-                "0":
+                '0':
                   value: '{"entity":true,"links":[]}'
       servers:
-      - url: https://192.168.1.52:20602
+        - url: 'https://192.168.1.52:20602'
+      operationId: acknowledge
+      tags:
+        - notification
     servers:
-    - url: https://192.168.1.52:20602
+      - url: 'https://192.168.1.52:20602'
   /access/rs/portal/userdata:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Get authorization data for a crew member. This is based on the role the user got during authentication.
       responses:
-        "200":
-          description: Auto generated using Swagger Inspector
+        '200':
+          description: 'OTS test data Oct 2019 - crewid: 1773'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_1'
               examples:
-                "0":
+                '0':
                   value: '{"features":["exchange:tradecart.drop","exchange:tradecart.un_advertise","exchange:tradecart.swap","exchange:tradecart.give","exchange:tradecart.pickup","exchange:tradecart.advertise","exchange:tradecart.shift","report:report_sources.reference_roster","flightSearch","report:report_sources.advertisement_crew_web","exchange:tradecart.simple_split","volunteerWrite","checkin","exchange:tradecart.split","exchange:show_exchange","exchange:tradecart.multi_shift","exchange:tradecart.direct_trade","report:report_sources.trip_information_web","exchange:tradecart.grab","report:report_sources.roster_published_crewaccess","exchange:tradecart.trade"],"role":"crew_fc","webapplications":["exchange:tradecart.drop","exchange:tradecart.un_advertise","exchange:tradecart.swap","exchange:tradecart.give","exchange:tradecart.pickup","exchange:tradecart.advertise","exchange:tradecart.shift","report:report_sources.reference_roster","flightSearch","report:report_sources.advertisement_crew_web","exchange:tradecart.simple_split","volunteerWrite","checkin","exchange:tradecart.split","exchange:show_exchange","exchange:tradecart.multi_shift","exchange:tradecart.direct_trade","report:report_sources.trip_information_web","exchange:tradecart.grab","report:report_sources.roster_published_crewaccess","exchange:tradecart.trade"],"maxInactiveInterval":1800,"crewId":"1773","attributes":{"crewIdentity":["1773"]},"serverTime":1581808394852,"user":"1773"}'
       servers:
-      - url: https://192.168.1.52:20602
+        - url: 'https://192.168.1.52:20602'
+      operationId: userdata
+      tags:
+        - start
     servers:
-    - url: https://192.168.1.52:20602
-  /access/rs/crew/1773/info:
+      - url: 'https://192.168.1.52:20602'
+  '/access/rs/crew/{crewid}/info/':
     get:
-      description: Auto generated using Swagger Inspector
+      description: 'Get personal information for a crew member: name, contact, address, passport, function, qualifications.'
       responses:
-        "200":
-          description: Auto generated using Swagger Inspector
+        '200':
+          description: 'OTS test data Oct 2019 - crewid: 1773'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_2'
               examples:
-                "0":
-                  value: '{"entity":{"bases":[],"ranks":[],"areas":[],"contracts":[],"travelDocument":[{"info":{"documentCategory":"PASSPORT","documentType":"PASSPORT","expiryDate":"2020-08-12","documentNumber":"JP455318","countryCode":"CH","surname":"Lancaster","givenNames":"Peter"},"attachment":[]}],"document":[{"name":"ATPL","validFrom":"1998-07-10T00:00:00Z","validTo":"2037-01-01T00:00:00Z"}],"qualification":[{"name":"EMJ","group":"AIRCRAFT","validFrom":"2005-12-21T23:00:00Z","validTo":"2016-08-07T22:00:00Z","validityState":"expired"},{"name":"EMJ","group":"AIRCRAFT","validFrom":"2016-08-07T22:00:00Z"},{"name":"TRI","group":"INSTRUCTOR","validFrom":"2016-11-04T23:00:00Z","validTo":"2099-12-31T00:00:00Z"}],"additionalInfo":[],"address":[{"which":"home","street":"Schönbergweg
-                    1","city":"Bern","zipCode":"1957","country":"CH","validFrom":"2010-08-29T00:00:00Z"}],"email":[{"isEditable":false,"which":"work","contact":"Peter.Lancaster@jeppesen.com","priority":1,"validFrom":"2011-05-01T00:00:00Z"}],"primaryPhone":{"isEditable":false,"which":"work","contact":"025950119","priority":1,"validFrom":"2012-07-25T00:00:00Z"},"secondaryPhone":{"isEditable":false,"which":"home","contact":"049849425","priority":2,"validFrom":"2010-08-19T00:00:00Z"},"temporaryPhone":{"isEditable":true},"restriction":[],"fleetQualifications":[],"crewPositions":["CP","FO"],"crewId":"1773","surname":"Lancaster","givenNames":"Peter","base":"ZRH","company":"Atlantis","employmentNumber":"JP1773","birthDay":"1964-03-18","birthCity":"Bern","gender":"F","companySeniority":"5981","crewFunction":"CP","crewCategory":"FC"},"links":[]}'
+                '0':
+                  value: '{"entity":{"bases":[],"ranks":[],"areas":[],"contracts":[],"travelDocument":[{"info":{"documentCategory":"PASSPORT","documentType":"PASSPORT","expiryDate":"2020-08-12","documentNumber":"JP455318","countryCode":"CH","surname":"Lancaster","givenNames":"Peter"},"attachment":[]}],"document":[{"name":"ATPL","validFrom":"1998-07-10T00:00:00Z","validTo":"2037-01-01T00:00:00Z"}],"qualification":[{"name":"EMJ","group":"AIRCRAFT","validFrom":"2005-12-21T23:00:00Z","validTo":"2016-08-07T22:00:00Z","validityState":"expired"},{"name":"EMJ","group":"AIRCRAFT","validFrom":"2016-08-07T22:00:00Z"},{"name":"TRI","group":"INSTRUCTOR","validFrom":"2016-11-04T23:00:00Z","validTo":"2099-12-31T00:00:00Z"}],"additionalInfo":[],"address":[{"which":"home","street":"Schönbergweg 1","city":"Bern","zipCode":"1957","country":"CH","validFrom":"2010-08-29T00:00:00Z"}],"email":[{"isEditable":false,"which":"work","contact":"Peter.Lancaster@jeppesen.com","priority":1,"validFrom":"2011-05-01T00:00:00Z"}],"primaryPhone":{"isEditable":false,"which":"work","contact":"025950119","priority":1,"validFrom":"2012-07-25T00:00:00Z"},"secondaryPhone":{"isEditable":false,"which":"home","contact":"049849425","priority":2,"validFrom":"2010-08-19T00:00:00Z"},"temporaryPhone":{"isEditable":true},"restriction":[],"fleetQualifications":[],"crewPositions":["CP","FO"],"crewId":"1773","surname":"Lancaster","givenNames":"Peter","base":"ZRH","company":"Atlantis","employmentNumber":"JP1773","birthDay":"1964-03-18","birthCity":"Bern","gender":"F","companySeniority":"5981","crewFunction":"CP","crewCategory":"FC"},"links":[]}'
       servers:
-      - url: https://192.168.1.52:20602
+        - url: 'https://192.168.1.52:20602'
+      operationId: crew-info
+      tags:
+        - start
     servers:
-    - url: https://192.168.1.52:20602
+      - url: 'https://192.168.1.52:20602'
+    parameters:
+      - schema:
+          type: string
+        name: crewid
+        in: path
+        required: true
   /access/rs/crew/roster/v1:
     get:
-      description: Auto generated using Swagger Inspector
+      description: 'The whole roster for a crew member, including all other crew on each flight.'
       responses:
-        "200":
-          description: Auto generated using Swagger Inspector
+        '200':
+          description: 'OTS test data Oct 2019 - crewid: 4456'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                'OTS crewid: 4456 Oct 2018':
+                  value:
+                    entity:
+                      customAttributes: []
+                      activities:
+                        - customAttributes: []
+                          annotations: []
+                          startStation: ZRH
+                          endStation: ZRH
+                          startTime: '2018-09-30T22:40:00Z'
+                          endTime: '2018-10-01T09:22:00Z'
+                          startTimeOffset: -240
+                          endTimeOffset: 120
+                          duration: 2740
+                          durationMinutes: 2740
+                          isWholeDayActivity: false
+                          fingerprint: bf6d5474
+                          key:
+                            dor: 29SEP2018
+                            name: '690043'
+                            role: FA
+                            fingerprint: bf6d5474
+                          base:
+                            stations:
+                              - ZRH
+                            id: ZRH
+                          duties:
+                            - customAttributes: []
+                              annotations: []
+                              startStation: MIA
+                              endStation: ZRH
+                              startTime: '2018-09-30T22:40:00Z'
+                              endTime: '2018-10-01T09:22:00Z'
+                              startTimeOffset: 0
+                              endTimeOffset: 0
+                              duration: 642
+                              durationMinutes: 642
+                              isWholeDayActivity: false
+                              id: 1
+                              length: 0
+                              time: 0
+                              timeMinutes: 0
+                              type: duty
+                          activities:
+                            - customAttributes: []
+                              annotations: []
+                              startStation: MIA
+                              endStation: MIA
+                              startTime: '2018-09-30T22:40:00Z'
+                              endTime: '2018-09-30T23:34:00Z'
+                              startTimeOffset: -240
+                              endTimeOffset: -240
+                              duration: 54
+                              durationMinutes: 54
+                              isWholeDayActivity: false
+                              fingerprint: e8ceae59
+                              trainingTags: []
+                              dutyId: 1
+                              type: briefing
+                            - customAttributes: []
+                              annotations: []
+                              startStation: MIA
+                              endStation: ZRH
+                              startTime: '2018-09-30T23:34:00Z'
+                              endTime: '2018-10-01T08:52:00Z'
+                              startTimeOffset: -240
+                              endTimeOffset: 120
+                              duration: 558
+                              durationMinutes: 558
+                              isWholeDayActivity: false
+                              fingerprint: e8ceae59
+                              trainingTags: []
+                              dutyId: 1
+                              role:
+                                id: FA
+                                isPassive: false
+                              assignedCrew:
+                                - crewId: '4456'
+                                  surname: Norton
+                                  givenNames: Lindsay
+                                  position: FA
+                                  seniority: '4618'
+                                  base: ZRH
+                                  isOnIdenticalTrip: true
+                              labels: []
+                              dor: 30SEP2018
+                              flightNumber: 65
+                              carrier: JP
+                              opSuffix: ' '
+                              isCancelled: false
+                              isCharter: false
+                              scheduledStartTime: '2018-09-30T23:40:00Z'
+                              scheduledEndTime: '2018-10-01T09:00:00Z'
+                              blockTimeMinutes: 558
+                              dutyTime: 642
+                              aircraftType: '333'
+                              tail: HBJHG
+                              type: flight-leg
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-01T08:52:00Z'
+                              endTime: '2018-10-01T09:22:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 120
+                              duration: 30
+                              durationMinutes: 30
+                              isWholeDayActivity: false
+                              fingerprint: e8ceae59
+                              trainingTags: []
+                              dutyId: 1
+                              type: debriefing
+                          openPositions: []
+                          labels: []
+                          area: ''
+                          blockTimeMinutes: 558
+                          dutyTime: 642
+                          dutyTimeMinutes: 642
+                          endOfLegalRest: '2018-10-01T23:22:00Z'
+                          endOfLegalRestOffset: 120
+                          isTraining: false
+                          isCharter: false
+                          isSplit: false
+                          fleetType: '330'
+                          advertisements: []
+                          isReserveAssigned: false
+                          patchTime: '2018-09-30T23:40:00Z'
+                          type: trip
+                        - customAttributes: []
+                          annotations: []
+                          startStation: ZRH
+                          endStation: ZRH
+                          startTime: '2018-10-02T22:00:00Z'
+                          endTime: '2018-10-03T22:00:00Z'
+                          startTimeOffset: 120
+                          endTimeOffset: 120
+                          duration: 1440
+                          durationMinutes: 1440
+                          isWholeDayActivity: false
+                          fingerprint: afc869d0
+                          trainingTags: []
+                          dutyId: 1
+                          activityCode:
+                            id: ZBFER_CCM
+                            group: LVE
+                            description: TASK
+                          isStandby: false
+                          isTraining: false
+                          isOffDuty: true
+                          advertisements: []
+                          isReserveAssigned: false
+                          patchTime: '2018-10-02T22:00:00Z'
+                          isOther: false
+                          type: personal-activity
+                        - customAttributes: []
+                          annotations: []
+                          startStation: ZRH
+                          endStation: ZRH
+                          startTime: '2018-10-06T09:40:00Z'
+                          endTime: '2018-10-08T05:20:00Z'
+                          startTimeOffset: 120
+                          endTimeOffset: 120
+                          duration: 2500
+                          durationMinutes: 2500
+                          isWholeDayActivity: false
+                          fingerprint: e1de224f
+                          key:
+                            dor: 06OCT2018
+                            name: '302506'
+                            role: FA
+                            fingerprint: e1de224f
+                          base:
+                            stations:
+                              - ZRH
+                            id: ZRH
+                          duties:
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: DEL
+                              startTime: '2018-10-06T09:40:00Z'
+                              endTime: '2018-10-06T19:36:00Z'
+                              startTimeOffset: 0
+                              endTimeOffset: 0
+                              duration: 596
+                              durationMinutes: 596
+                              isWholeDayActivity: false
+                              id: 1
+                              length: 0
+                              time: 0
+                              timeMinutes: 0
+                              type: duty
+                            - customAttributes: []
+                              annotations: []
+                              startStation: DEL
+                              endStation: ZRH
+                              startTime: '2018-10-07T18:45:00Z'
+                              endTime: '2018-10-08T05:20:00Z'
+                              startTimeOffset: 0
+                              endTimeOffset: 0
+                              duration: 635
+                              durationMinutes: 635
+                              isWholeDayActivity: false
+                              id: 2
+                              length: 0
+                              time: 0
+                              timeMinutes: 0
+                              type: duty
+                          activities:
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-06T09:40:00Z'
+                              endTime: '2018-10-06T11:02:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 120
+                              duration: 82
+                              durationMinutes: 82
+                              isWholeDayActivity: false
+                              fingerprint: 9525b232
+                              trainingTags: []
+                              dutyId: 1
+                              type: briefing
+                            - customAttributes: []
+                              annotations: []
+                              checkin:
+                                startTime: '2018-10-06T07:40:00Z'
+                                endTime: '2018-10-06T10:40:00Z'
+                                startTimeOffset: 120
+                                endTimeOffset: 120
+                              startStation: ZRH
+                              endStation: DEL
+                              startTime: '2018-10-06T11:02:00Z'
+                              endTime: '2018-10-06T19:06:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 330
+                              duration: 484
+                              durationMinutes: 484
+                              isWholeDayActivity: false
+                              fingerprint: 9525b232
+                              trainingTags: []
+                              dutyId: 1
+                              role:
+                                id: FA
+                                isPassive: false
+                              assignedCrew:
+                                - crewId: '4456'
+                                  surname: Norton
+                                  givenNames: Lindsay
+                                  position: FA
+                                  seniority: '4618'
+                                  base: ZRH
+                                  isOnIdenticalTrip: true
+                              labels: []
+                              dor: 06OCT2018
+                              flightNumber: 146
+                              carrier: JP
+                              opSuffix: ' '
+                              isCancelled: false
+                              isCharter: false
+                              scheduledStartTime: '2018-10-06T10:40:00Z'
+                              scheduledEndTime: '2018-10-06T18:25:00Z'
+                              blockTimeMinutes: 484
+                              dutyTime: 596
+                              aircraftType: '333'
+                              tail: HBJHJ
+                              statusLabel: 'ETD: +0:22'
+                              type: flight-leg
+                            - customAttributes: []
+                              annotations: []
+                              startStation: DEL
+                              endStation: DEL
+                              startTime: '2018-10-06T19:06:00Z'
+                              endTime: '2018-10-06T19:36:00Z'
+                              startTimeOffset: 330
+                              endTimeOffset: 330
+                              duration: 30
+                              durationMinutes: 30
+                              isWholeDayActivity: false
+                              fingerprint: 9525b232
+                              trainingTags: []
+                              dutyId: 1
+                              type: debriefing
+                            - customAttributes: []
+                              annotations: []
+                              startStation: DEL
+                              endStation: DEL
+                              startTime: '2018-10-06T19:36:00Z'
+                              endTime: '2018-10-07T18:45:00Z'
+                              startTimeOffset: 330
+                              endTimeOffset: 330
+                              duration: 1389
+                              durationMinutes: 1389
+                              isWholeDayActivity: false
+                              fingerprint: 9525b232
+                              trainingTags: []
+                              dutyId: 1
+                              hotel:
+                                id: '13'
+                                name: Hyatt Regency Delhi
+                                email: dummy@host.com
+                                street: 'Bhikaji Cama Place, Ring Road'
+                                city: New Delhi
+                                country: IN
+                                phone: 012 345 6789
+                              type: layover
+                            - customAttributes: []
+                              annotations: []
+                              startStation: DEL
+                              endStation: DEL
+                              startTime: '2018-10-07T18:45:00Z'
+                              endTime: '2018-10-07T20:18:00Z'
+                              startTimeOffset: 330
+                              endTimeOffset: 330
+                              duration: 93
+                              durationMinutes: 93
+                              isWholeDayActivity: false
+                              fingerprint: a1105fd6
+                              trainingTags: []
+                              dutyId: 2
+                              type: briefing
+                            - customAttributes: []
+                              annotations: []
+                              startStation: DEL
+                              endStation: ZRH
+                              startTime: '2018-10-07T20:18:00Z'
+                              endTime: '2018-10-08T04:50:00Z'
+                              startTimeOffset: 330
+                              endTimeOffset: 120
+                              duration: 512
+                              durationMinutes: 512
+                              isWholeDayActivity: false
+                              fingerprint: a1105fd6
+                              trainingTags: []
+                              dutyId: 2
+                              role:
+                                id: FA
+                                isPassive: false
+                              assignedCrew:
+                                - crewId: '4456'
+                                  surname: Norton
+                                  givenNames: Lindsay
+                                  position: FA
+                                  seniority: '4618'
+                                  base: ZRH
+                                  isOnIdenticalTrip: true
+                              labels: []
+                              dor: 07OCT2018
+                              flightNumber: 147
+                              carrier: JP
+                              opSuffix: ' '
+                              isCancelled: false
+                              isCharter: false
+                              scheduledStartTime: '2018-10-07T19:45:00Z'
+                              scheduledEndTime: '2018-10-08T04:20:00Z'
+                              blockTimeMinutes: 512
+                              dutyTime: 635
+                              aircraftType: '333'
+                              tail: HBJHK
+                              statusLabel: 'ETD: +0:33'
+                              type: flight-leg
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-08T04:50:00Z'
+                              endTime: '2018-10-08T05:20:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 120
+                              duration: 30
+                              durationMinutes: 30
+                              isWholeDayActivity: false
+                              fingerprint: a1105fd6
+                              trainingTags: []
+                              dutyId: 2
+                              type: debriefing
+                          openPositions: []
+                          labels: []
+                          area: ''
+                          blockTimeMinutes: 996
+                          dutyTime: 1231
+                          dutyTimeMinutes: 1231
+                          endOfLegalRest: '2018-10-08T19:20:00Z'
+                          endOfLegalRestOffset: 120
+                          isTraining: false
+                          isCharter: false
+                          isSplit: false
+                          fleetType: '330'
+                          advertisements: []
+                          isReserveAssigned: false
+                          patchTime: '2018-10-06T10:40:00Z'
+                          type: trip
+                        - customAttributes: []
+                          annotations: []
+                          startStation: ZRH
+                          endStation: ZRH
+                          startTime: '2018-10-11T19:45:00Z'
+                          endTime: '2018-10-14T04:40:00Z'
+                          startTimeOffset: 120
+                          endTimeOffset: 120
+                          duration: 3325
+                          durationMinutes: 3325
+                          isWholeDayActivity: false
+                          fingerprint: bd9e566e
+                          key:
+                            dor: 11OCT2018
+                            name: '218995'
+                            role: FA
+                            fingerprint: bd9e566e
+                          base:
+                            stations:
+                              - ZRH
+                            id: ZRH
+                          duties:
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: SIN
+                              startTime: '2018-10-11T19:45:00Z'
+                              endTime: '2018-10-12T09:25:00Z'
+                              startTimeOffset: 0
+                              endTimeOffset: 0
+                              duration: 820
+                              durationMinutes: 820
+                              isWholeDayActivity: false
+                              id: 1
+                              length: 0
+                              time: 0
+                              timeMinutes: 0
+                              type: duty
+                            - customAttributes: []
+                              annotations: []
+                              startStation: SIN
+                              endStation: ZRH
+                              startTime: '2018-10-13T14:10:00Z'
+                              endTime: '2018-10-14T04:40:00Z'
+                              startTimeOffset: 0
+                              endTimeOffset: 0
+                              duration: 870
+                              durationMinutes: 870
+                              isWholeDayActivity: false
+                              id: 2
+                              length: 0
+                              time: 0
+                              timeMinutes: 0
+                              type: duty
+                          activities:
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-11T19:45:00Z'
+                              endTime: '2018-10-11T20:45:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 120
+                              duration: 60
+                              durationMinutes: 60
+                              isWholeDayActivity: false
+                              fingerprint: 4439424c
+                              trainingTags: []
+                              dutyId: 1
+                              type: briefing
+                            - customAttributes: []
+                              annotations: []
+                              checkin:
+                                startTime: '2018-10-11T17:45:00Z'
+                                endTime: '2018-10-11T20:45:00Z'
+                                startTimeOffset: 120
+                                endTimeOffset: 120
+                              startStation: ZRH
+                              endStation: SIN
+                              startTime: '2018-10-11T20:45:00Z'
+                              endTime: '2018-10-12T08:55:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 480
+                              duration: 730
+                              durationMinutes: 730
+                              isWholeDayActivity: false
+                              fingerprint: 4439424c
+                              trainingTags: []
+                              dutyId: 1
+                              role:
+                                id: FA
+                                isPassive: false
+                              assignedCrew:
+                                - crewId: '4456'
+                                  surname: Norton
+                                  givenNames: Lindsay
+                                  position: FA
+                                  seniority: '4618'
+                                  base: ZRH
+                                  isOnIdenticalTrip: true
+                                - crewId: '4072'
+                                  surname: Quinn
+                                  givenNames: Jim
+                                  position: FA
+                                  seniority: '2834'
+                                  base: ZRH
+                                  isOnIdenticalTrip: true
+                              labels: []
+                              dor: 11OCT2018
+                              flightNumber: 176
+                              carrier: JP
+                              opSuffix: ' '
+                              isCancelled: false
+                              isCharter: false
+                              scheduledStartTime: '2018-10-11T20:45:00Z'
+                              scheduledEndTime: '2018-10-12T08:55:00Z'
+                              blockTimeMinutes: 730
+                              dutyTime: 820
+                              aircraftType: '773'
+                              tail: HBJNG
+                              type: flight-leg
+                            - customAttributes: []
+                              annotations: []
+                              startStation: SIN
+                              endStation: SIN
+                              startTime: '2018-10-12T08:55:00Z'
+                              endTime: '2018-10-12T09:25:00Z'
+                              startTimeOffset: 480
+                              endTimeOffset: 480
+                              duration: 30
+                              durationMinutes: 30
+                              isWholeDayActivity: false
+                              fingerprint: 4439424c
+                              trainingTags: []
+                              dutyId: 1
+                              type: debriefing
+                            - customAttributes: []
+                              annotations: []
+                              startStation: SIN
+                              endStation: SIN
+                              startTime: '2018-10-12T09:25:00Z'
+                              endTime: '2018-10-13T14:10:00Z'
+                              startTimeOffset: 480
+                              endTimeOffset: 480
+                              duration: 1725
+                              durationMinutes: 1725
+                              isWholeDayActivity: false
+                              fingerprint: 4439424c
+                              trainingTags: []
+                              dutyId: 1
+                              hotel:
+                                transport:
+                                  id: '27'
+                                  name: Tour East Singapore (1996) Pte. Ltd.
+                                  phone: 012 345 6789
+                                  email: dummy@host.com
+                                id: '41'
+                                name: Pan Pacific Hotel
+                                email: dummy@host.com
+                                street: 7 Raffles Boulevard
+                                city: Singapore
+                                postalCode: '39595'
+                                country: SG
+                                phone: 012 345 6789
+                              type: layover
+                            - customAttributes: []
+                              annotations: []
+                              startStation: SIN
+                              endStation: SIN
+                              startTime: '2018-10-13T14:10:00Z'
+                              endTime: '2018-10-13T15:10:00Z'
+                              startTimeOffset: 480
+                              endTimeOffset: 480
+                              duration: 60
+                              durationMinutes: 60
+                              isWholeDayActivity: false
+                              fingerprint: 3a1d83d9
+                              trainingTags: []
+                              dutyId: 2
+                              type: briefing
+                            - customAttributes: []
+                              annotations: []
+                              startStation: SIN
+                              endStation: ZRH
+                              startTime: '2018-10-13T15:10:00Z'
+                              endTime: '2018-10-14T04:10:00Z'
+                              startTimeOffset: 480
+                              endTimeOffset: 120
+                              duration: 780
+                              durationMinutes: 780
+                              isWholeDayActivity: false
+                              fingerprint: 3a1d83d9
+                              trainingTags: []
+                              dutyId: 2
+                              role:
+                                id: FA
+                                isPassive: false
+                              assignedCrew:
+                                - crewId: '4456'
+                                  surname: Norton
+                                  givenNames: Lindsay
+                                  position: FA
+                                  seniority: '4618'
+                                  base: ZRH
+                                  isOnIdenticalTrip: true
+                                - crewId: '4072'
+                                  surname: Quinn
+                                  givenNames: Jim
+                                  position: FA
+                                  seniority: '2834'
+                                  base: ZRH
+                                  isOnIdenticalTrip: true
+                              labels: []
+                              dor: 13OCT2018
+                              flightNumber: 177
+                              carrier: JP
+                              opSuffix: ' '
+                              isCancelled: false
+                              isCharter: false
+                              scheduledStartTime: '2018-10-13T15:10:00Z'
+                              scheduledEndTime: '2018-10-14T04:10:00Z'
+                              blockTimeMinutes: 780
+                              dutyTime: 870
+                              aircraftType: '773'
+                              type: flight-leg
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-14T04:10:00Z'
+                              endTime: '2018-10-14T04:40:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 120
+                              duration: 30
+                              durationMinutes: 30
+                              isWholeDayActivity: false
+                              fingerprint: 3a1d83d9
+                              trainingTags: []
+                              dutyId: 2
+                              type: debriefing
+                          openPositions: []
+                          labels: []
+                          area: ''
+                          blockTimeMinutes: 1510
+                          dutyTime: 1690
+                          dutyTimeMinutes: 1690
+                          endOfLegalRest: '2018-10-16T04:00:00Z'
+                          endOfLegalRestOffset: 120
+                          isTraining: false
+                          isCharter: false
+                          isSplit: false
+                          fleetType: '777'
+                          advertisements: []
+                          isReserveAssigned: false
+                          patchTime: '2018-10-11T20:45:00Z'
+                          type: trip
+                        - customAttributes: []
+                          annotations: []
+                          startStation: ZRH
+                          endStation: ZRH
+                          startTime: '2018-10-19T09:40:00Z'
+                          endTime: '2018-10-21T04:50:00Z'
+                          startTimeOffset: 120
+                          endTimeOffset: 120
+                          duration: 2500
+                          durationMinutes: 2500
+                          isWholeDayActivity: false
+                          fingerprint: dd2bf4fe
+                          key:
+                            dor: 19OCT2018
+                            name: '502318'
+                            role: FA
+                            fingerprint: dd2bf4fe
+                          base:
+                            stations:
+                              - ZRH
+                            id: ZRH
+                          duties:
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: DEL
+                              startTime: '2018-10-19T09:40:00Z'
+                              endTime: '2018-10-19T18:55:00Z'
+                              startTimeOffset: 0
+                              endTimeOffset: 0
+                              duration: 555
+                              durationMinutes: 555
+                              isWholeDayActivity: false
+                              id: 1
+                              length: 0
+                              time: 0
+                              timeMinutes: 0
+                              type: duty
+                            - customAttributes: []
+                              annotations: []
+                              startStation: DEL
+                              endStation: ZRH
+                              startTime: '2018-10-20T18:45:00Z'
+                              endTime: '2018-10-21T04:50:00Z'
+                              startTimeOffset: 0
+                              endTimeOffset: 0
+                              duration: 605
+                              durationMinutes: 605
+                              isWholeDayActivity: false
+                              id: 2
+                              length: 0
+                              time: 0
+                              timeMinutes: 0
+                              type: duty
+                          activities:
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-19T09:40:00Z'
+                              endTime: '2018-10-19T10:40:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 120
+                              duration: 60
+                              durationMinutes: 60
+                              isWholeDayActivity: false
+                              fingerprint: 2a0aad60
+                              trainingTags: []
+                              dutyId: 1
+                              type: briefing
+                            - customAttributes: []
+                              annotations: []
+                              checkin:
+                                startTime: '2018-10-19T07:40:00Z'
+                                endTime: '2018-10-19T10:40:00Z'
+                                startTimeOffset: 120
+                                endTimeOffset: 120
+                              startStation: ZRH
+                              endStation: DEL
+                              startTime: '2018-10-19T10:40:00Z'
+                              endTime: '2018-10-19T18:25:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 330
+                              duration: 465
+                              durationMinutes: 465
+                              isWholeDayActivity: false
+                              fingerprint: 2a0aad60
+                              trainingTags: []
+                              dutyId: 1
+                              role:
+                                id: FA
+                                isPassive: false
+                              assignedCrew:
+                                - crewId: '4456'
+                                  surname: Norton
+                                  givenNames: Lindsay
+                                  position: FA
+                                  seniority: '4618'
+                                  base: ZRH
+                                  isOnIdenticalTrip: true
+                              labels: []
+                              dor: 19OCT2018
+                              flightNumber: 146
+                              carrier: JP
+                              opSuffix: ' '
+                              isCancelled: false
+                              isCharter: false
+                              scheduledStartTime: '2018-10-19T10:40:00Z'
+                              scheduledEndTime: '2018-10-19T18:25:00Z'
+                              blockTimeMinutes: 465
+                              dutyTime: 555
+                              aircraftType: '333'
+                              tail: HBJHF
+                              type: flight-leg
+                            - customAttributes: []
+                              annotations: []
+                              startStation: DEL
+                              endStation: DEL
+                              startTime: '2018-10-19T18:25:00Z'
+                              endTime: '2018-10-19T18:55:00Z'
+                              startTimeOffset: 330
+                              endTimeOffset: 330
+                              duration: 30
+                              durationMinutes: 30
+                              isWholeDayActivity: false
+                              fingerprint: 2a0aad60
+                              trainingTags: []
+                              dutyId: 1
+                              type: debriefing
+                            - customAttributes: []
+                              annotations: []
+                              startStation: DEL
+                              endStation: DEL
+                              startTime: '2018-10-19T18:55:00Z'
+                              endTime: '2018-10-20T18:45:00Z'
+                              startTimeOffset: 330
+                              endTimeOffset: 330
+                              duration: 1430
+                              durationMinutes: 1430
+                              isWholeDayActivity: false
+                              fingerprint: 2a0aad60
+                              trainingTags: []
+                              dutyId: 1
+                              hotel:
+                                id: '13'
+                                name: Hyatt Regency Delhi
+                                email: dummy@host.com
+                                street: 'Bhikaji Cama Place, Ring Road'
+                                city: New Delhi
+                                country: IN
+                                phone: 012 345 6789
+                              type: layover
+                            - customAttributes: []
+                              annotations: []
+                              startStation: DEL
+                              endStation: DEL
+                              startTime: '2018-10-20T18:45:00Z'
+                              endTime: '2018-10-20T19:45:00Z'
+                              startTimeOffset: 330
+                              endTimeOffset: 330
+                              duration: 60
+                              durationMinutes: 60
+                              isWholeDayActivity: false
+                              fingerprint: 8283bd96
+                              trainingTags: []
+                              dutyId: 2
+                              type: briefing
+                            - customAttributes: []
+                              annotations: []
+                              startStation: DEL
+                              endStation: ZRH
+                              startTime: '2018-10-20T19:45:00Z'
+                              endTime: '2018-10-21T04:20:00Z'
+                              startTimeOffset: 330
+                              endTimeOffset: 120
+                              duration: 515
+                              durationMinutes: 515
+                              isWholeDayActivity: false
+                              fingerprint: 8283bd96
+                              trainingTags: []
+                              dutyId: 2
+                              role:
+                                id: FA
+                                isPassive: false
+                              assignedCrew:
+                                - crewId: '4456'
+                                  surname: Norton
+                                  givenNames: Lindsay
+                                  position: FA
+                                  seniority: '4618'
+                                  base: ZRH
+                                  isOnIdenticalTrip: true
+                              labels: []
+                              dor: 20OCT2018
+                              flightNumber: 147
+                              carrier: JP
+                              opSuffix: ' '
+                              isCancelled: false
+                              isCharter: false
+                              scheduledStartTime: '2018-10-20T19:45:00Z'
+                              scheduledEndTime: '2018-10-21T04:20:00Z'
+                              blockTimeMinutes: 515
+                              dutyTime: 605
+                              aircraftType: '333'
+                              tail: HBJHF
+                              type: flight-leg
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-21T04:20:00Z'
+                              endTime: '2018-10-21T04:50:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 120
+                              duration: 30
+                              durationMinutes: 30
+                              isWholeDayActivity: false
+                              fingerprint: 8283bd96
+                              trainingTags: []
+                              dutyId: 2
+                              type: debriefing
+                          openPositions: []
+                          labels: []
+                          area: ''
+                          blockTimeMinutes: 980
+                          dutyTime: 1160
+                          dutyTimeMinutes: 1160
+                          endOfLegalRest: '2018-10-21T18:50:00Z'
+                          endOfLegalRestOffset: 120
+                          isTraining: false
+                          isCharter: false
+                          isSplit: false
+                          fleetType: '330'
+                          advertisements: []
+                          isReserveAssigned: false
+                          patchTime: '2018-10-19T10:40:00Z'
+                          type: trip
+                        - customAttributes: []
+                          annotations: []
+                          checkin:
+                            startTime: '2018-10-24T01:00:00Z'
+                            endTime: '2018-10-24T04:00:00Z'
+                            startTimeOffset: 120
+                            endTimeOffset: 120
+                          startStation: ZRH
+                          endStation: ZRH
+                          startTime: '2018-10-24T03:00:00Z'
+                          endTime: '2018-10-27T21:00:00Z'
+                          startTimeOffset: 120
+                          endTimeOffset: 120
+                          duration: 5400
+                          durationMinutes: 5400
+                          isWholeDayActivity: false
+                          fingerprint: dc0dd8d6
+                          trainingTags: []
+                          dutyId: 1
+                          activities:
+                            - customAttributes: []
+                              annotations: []
+                              checkin:
+                                startTime: '2018-10-24T01:00:00Z'
+                                endTime: '2018-10-24T04:00:00Z'
+                                startTimeOffset: 120
+                                endTimeOffset: 120
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-24T03:00:00Z'
+                              endTime: '2018-10-24T15:00:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 120
+                              duration: 720
+                              durationMinutes: 720
+                              isWholeDayActivity: false
+                              fingerprint: aa9da47a
+                              trainingTags: []
+                              dutyId: 1
+                              activityCode:
+                                id: SBYAD
+                                group: SBH
+                                description: TASK
+                              isStandby: true
+                              isTraining: false
+                              isOffDuty: false
+                              advertisements: []
+                              isReserveAssigned: false
+                              patchTime: '2018-10-24T03:00:00Z'
+                              isOther: false
+                              type: personal-activity
+                            - customAttributes: []
+                              annotations: []
+                              checkin:
+                                startTime: '2018-10-25T01:00:00Z'
+                                endTime: '2018-10-25T04:00:00Z'
+                                startTimeOffset: 120
+                                endTimeOffset: 120
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-25T03:00:00Z'
+                              endTime: '2018-10-25T15:00:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 120
+                              duration: 720
+                              durationMinutes: 720
+                              isWholeDayActivity: false
+                              fingerprint: 9a10e077
+                              trainingTags: []
+                              dutyId: 1
+                              activityCode:
+                                id: SBYAD
+                                group: SBH
+                                description: TASK
+                              isStandby: true
+                              isTraining: false
+                              isOffDuty: false
+                              advertisements: []
+                              isReserveAssigned: false
+                              patchTime: '2018-10-25T03:00:00Z'
+                              isOther: false
+                              type: personal-activity
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-26T01:00:00Z'
+                              endTime: '2018-10-26T21:00:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 120
+                              duration: 1200
+                              durationMinutes: 1200
+                              isWholeDayActivity: false
+                              fingerprint: 43cf0a5e
+                              trainingTags: []
+                              dutyId: 1
+                              activityCode:
+                                id: RESX
+                                group: RES
+                                description: TASK
+                              isStandby: true
+                              isTraining: false
+                              isOffDuty: true
+                              advertisements: []
+                              isReserveAssigned: false
+                              patchTime: '2018-10-26T01:00:00Z'
+                              isOther: false
+                              type: personal-activity
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-27T01:00:00Z'
+                              endTime: '2018-10-27T21:00:00Z'
+                              startTimeOffset: 120
+                              endTimeOffset: 120
+                              duration: 1200
+                              durationMinutes: 1200
+                              isWholeDayActivity: false
+                              fingerprint: 7b74eeb1
+                              trainingTags: []
+                              dutyId: 1
+                              activityCode:
+                                id: RESX
+                                group: RES
+                                description: TASK
+                              isStandby: true
+                              isTraining: false
+                              isOffDuty: true
+                              advertisements: []
+                              isReserveAssigned: false
+                              patchTime: '2018-10-27T01:00:00Z'
+                              isOther: false
+                              type: personal-activity
+                          advertisements: []
+                          patchTime: '2018-10-24T03:00:00Z'
+                          type: reserve-block
+                          activityType: SBYAD
+                        - customAttributes: []
+                          annotations: []
+                          startStation: ZRH
+                          endStation: ZRH
+                          startTime: '2018-10-31T15:10:00Z'
+                          endTime: '2018-10-31T21:15:00Z'
+                          startTimeOffset: 60
+                          endTimeOffset: 60
+                          duration: 275
+                          durationMinutes: 275
+                          isWholeDayActivity: false
+                          fingerprint: 78f53f91
+                          key:
+                            dor: 31OCT2018
+                            name: '696961'
+                            role: FA
+                            fingerprint: 78f53f91
+                          base:
+                            stations:
+                              - ZRH
+                            id: ZRH
+                          duties:
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-31T15:10:00Z'
+                              endTime: '2018-10-31T21:15:00Z'
+                              startTimeOffset: 0
+                              endTimeOffset: 0
+                              duration: 365
+                              durationMinutes: 365
+                              isWholeDayActivity: false
+                              id: 1
+                              length: 0
+                              time: 0
+                              timeMinutes: 0
+                              type: duty
+                          activities:
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-31T15:10:00Z'
+                              endTime: '2018-10-31T16:10:00Z'
+                              startTimeOffset: 60
+                              endTimeOffset: 60
+                              duration: 60
+                              durationMinutes: 60
+                              isWholeDayActivity: false
+                              fingerprint: 6c28b0e6
+                              trainingTags: []
+                              dutyId: 1
+                              type: briefing
+                            - customAttributes: []
+                              annotations: []
+                              checkin:
+                                startTime: '2018-10-31T13:10:00Z'
+                                endTime: '2018-10-31T16:10:00Z'
+                                startTimeOffset: 60
+                                endTimeOffset: 60
+                              startStation: ZRH
+                              endStation: MAN
+                              startTime: '2018-10-31T16:10:00Z'
+                              endTime: '2018-10-31T18:10:00Z'
+                              startTimeOffset: 60
+                              endTimeOffset: 0
+                              duration: 120
+                              durationMinutes: 120
+                              isWholeDayActivity: false
+                              fingerprint: 6c28b0e6
+                              trainingTags: []
+                              dutyId: 1
+                              role:
+                                id: FA
+                                isPassive: false
+                              assignedCrew:
+                                - crewId: '4456'
+                                  surname: Norton
+                                  givenNames: Lindsay
+                                  position: FA
+                                  seniority: '4618'
+                                  base: ZRH
+                                  isOnIdenticalTrip: true
+                              labels: []
+                              dor: 31OCT2018
+                              flightNumber: 380
+                              carrier: JP
+                              opSuffix: ' '
+                              isCancelled: false
+                              isCharter: false
+                              scheduledStartTime: '2018-10-31T16:10:00Z'
+                              scheduledEndTime: '2018-10-31T18:10:00Z'
+                              blockTimeMinutes: 120
+                              connectionTimeMinutes: 40
+                              dutyTime: 365
+                              aircraftType: '319'
+                              tail: HBIPY
+                              type: flight-leg
+                            - customAttributes: []
+                              annotations: []
+                              startStation: MAN
+                              endStation: ZRH
+                              startTime: '2018-10-31T18:50:00Z'
+                              endTime: '2018-10-31T20:45:00Z'
+                              startTimeOffset: 0
+                              endTimeOffset: 60
+                              duration: 115
+                              durationMinutes: 115
+                              isWholeDayActivity: false
+                              fingerprint: f913e829
+                              trainingTags: []
+                              dutyId: 1
+                              role:
+                                id: FA
+                                isPassive: false
+                              assignedCrew:
+                                - crewId: '4456'
+                                  surname: Norton
+                                  givenNames: Lindsay
+                                  position: FA
+                                  seniority: '4618'
+                                  base: ZRH
+                                  isOnIdenticalTrip: true
+                              labels: []
+                              dor: 31OCT2018
+                              flightNumber: 381
+                              carrier: JP
+                              opSuffix: ' '
+                              isCancelled: false
+                              isCharter: false
+                              scheduledStartTime: '2018-10-31T18:50:00Z'
+                              scheduledEndTime: '2018-10-31T20:45:00Z'
+                              blockTimeMinutes: 115
+                              dutyTime: 365
+                              aircraftType: '319'
+                              tail: HBIPY
+                              type: flight-leg
+                            - customAttributes: []
+                              annotations: []
+                              startStation: ZRH
+                              endStation: ZRH
+                              startTime: '2018-10-31T20:45:00Z'
+                              endTime: '2018-10-31T21:15:00Z'
+                              startTimeOffset: 60
+                              endTimeOffset: 60
+                              duration: 30
+                              durationMinutes: 30
+                              isWholeDayActivity: false
+                              fingerprint: f913e829
+                              trainingTags: []
+                              dutyId: 1
+                              type: debriefing
+                          openPositions: []
+                          labels: []
+                          area: ''
+                          blockTimeMinutes: 235
+                          dutyTime: 365
+                          dutyTimeMinutes: 365
+                          endOfLegalRest: '2018-10-31T21:15:00Z'
+                          endOfLegalRestOffset: 60
+                          isTraining: false
+                          isCharter: false
+                          isSplit: false
+                          fleetType: 32S
+                          advertisements: []
+                          isReserveAssigned: false
+                          patchTime: '2018-10-31T16:10:00Z'
+                          type: trip
+                      periods:
+                        - customAttributes: []
+                          index: -1
+                          name: TODO
+                          startTime: '2018-09-01T00:00:00Z'
+                          endTime: '2018-10-01T00:00:00Z'
+                          currentBlockTime: 26
+                          currentDutyCreditTime: 80
+                          totalBlockTime: 26
+                          totalDutyCreditTime: 80
+                          originalBlockTime: 0
+                          originalDutyCreditTime: 0
+                          isCabin: true
+                        - customAttributes: []
+                          index: 0
+                          name: TODO
+                          startTime: '2018-10-01T00:00:00Z'
+                          endTime: '2018-11-01T00:00:00Z'
+                          currentBlockTime: 532
+                          currentDutyCreditTime: 562
+                          totalBlockTime: 4253
+                          totalDutyCreditTime: 6448
+                          originalBlockTime: 0
+                          originalDutyCreditTime: 0
+                          isCabin: true
+                        - customAttributes: []
+                          index: 1
+                          name: TODO
+                          startTime: '2018-11-01T00:00:00Z'
+                          endTime: '2018-12-01T00:00:00Z'
+                          currentBlockTime: 0
+                          currentDutyCreditTime: 0
+                          totalBlockTime: 0
+                          totalDutyCreditTime: 0
+                          originalBlockTime: 0
+                          originalDutyCreditTime: 0
+                          isCabin: true
+                      crewId: '4456'
+                    links: []
+            application/xml:
+              schema:
+                type: object
+                properties: {}
       servers:
-      - url: https://192.168.1.52:20602
+        - url: 'https://192.168.1.52:20602'
+      operationId: roster
+      tags:
+        - start
     servers:
-    - url: https://192.168.1.52:20602
+      - url: 'https://192.168.1.52:20602'
   /access/rs/access/flightlog/find:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Read all flight log information for a trip.
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/body'
             examples:
-              "0":
+              '0':
                 value: '{"dor":"01OCT2018","name":"901479","role":"CP","fingerprint":"d875f7a3"}'
       responses:
-        "200":
+        '200':
           description: Auto generated using Swagger Inspector
       servers:
-      - url: https://192.168.1.52:20602
+        - url: 'https://192.168.1.52:20602'
+      operationId: flightlog-find
+      tags:
+        - flightlog
     servers:
-    - url: https://192.168.1.52:20602
+      - url: 'https://192.168.1.52:20602'
   /access/rs/system/time:
     get:
-      description: Auto generated using Swagger Inspector
+      description: 'Returns offset times between UTC and the time shown in the UI. The REST API uses UTC, but the application shows times in local homebase time.'
       responses:
-        "200":
-          description: Auto generated using Swagger Inspector
+        '200':
+          description: ''
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_3'
               examples:
-                "0":
+                '0':
                   value: '{"currentTime":"2018-10-04T09:14:00Z","homeBaseOffset":{"offsetPeriods":[{"start":"2017-03-26T01:00:00Z","end":"2017-10-29T02:00:00Z","utcOffset":120},{"start":"2018-03-25T01:00:00Z","end":"2018-10-28T02:00:00Z","utcOffset":120},{"start":"2019-03-31T01:00:00Z","end":"2019-10-27T02:00:00Z","utcOffset":120}],"stdOffset":60}}'
       servers:
-      - url: https://192.168.1.52:20602
+        - url: 'https://192.168.1.52:20602'
+      operationId: time
+      tags:
+        - start
     servers:
-    - url: https://192.168.1.52:20602
+      - url: 'https://192.168.1.52:20602'
   /access/rs/access/flightlog/save:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Update flight log information for a trip.
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/body_1'
             examples:
-              "0":
+              '0':
                 value: '{"tripKey":{"dor":"01OCT2018","name":"901479","role":"CP","fingerprint":"d875f7a3"},"entries":[{"startTime":"2018-10-01T05:36:00Z","landings":[{"attempts":"2","pilot":{"crewId":"1773"},"visibility":"CAT3"}],"takeoffs":[{"attempts":"1","pilot":{"crewId":"1773"}}],"descriptor":"JP1678","pilotInCommand":{"crewId":"1773"}},{"startTime":"2018-10-01T08:02:00Z","landings":[],"takeoffs":[],"descriptor":"JP1679","pilotInCommand":{"crewId":"1773"}},{"startTime":"2018-10-01T10:21:00Z","landings":[{"attempts":"1","pilot":{"crewId":"1773"}}],"takeoffs":[],"descriptor":"JP2824","pilotInCommand":{"crewId":"1773"}},{"startTime":"2018-10-02T04:57:00Z","landings":[],"takeoffs":[],"descriptor":"JP2042"},{"startTime":"2018-10-02T07:32:00Z","landings":[{"attempts":"1","pilot":{"crewId":"1773"}}],"takeoffs":[],"descriptor":"JP2043"},{"startTime":"2018-10-03T05:25:00Z","landings":[],"takeoffs":[{"attempts":"1","pilot":{"crewId":"1773"}}],"descriptor":"JP1430","pilotInCommand":{"crewId":"1773"}},{"startTime":"2018-10-03T08:21:00Z","landings":[],"takeoffs":[],"descriptor":"JP1431"},{"startTime":"2018-10-04T03:57:00Z","landings":[],"takeoffs":[],"descriptor":"JP2801"},{"startTime":"2018-10-04T06:28:00Z","landings":[],"takeoffs":[],"descriptor":"JP1484"},{"startTime":"2018-10-04T08:33:00Z","landings":[],"takeoffs":[],"descriptor":"JP1485"}]}'
       responses:
-        "200":
+        '200':
           description: Auto generated using Swagger Inspector
       servers:
-      - url: https://192.168.1.52:20602
+        - url: 'https://192.168.1.52:20602'
+      operationId: flightlog-save
+      tags:
+        - flightlog
     servers:
-    - url: https://192.168.1.52:20602
+      - url: 'https://192.168.1.52:20602'
   /access/rs/modules/active:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Initial setup data for UI... details unknown
       responses:
-        "200":
+        '200':
           description: Auto generated using Swagger Inspector
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_4'
               examples:
-                "0":
+                '0':
                   value: '{"access":{"moduleName":"access","displayName":"Roster","entryPointContextPath":"/access/crewweb/#/PublishedRoster","menuIconContextPath":"/access/crewweb/access/icons/access.svg","menuIconId":"question-mark_outlined_24","menuSortOrderIndex":10}}'
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+            multipart/form-data:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example:
+                  value:
+                    access:
+                      moduleName: access
+                      displayName: Roster
+                      entryPointContextPath: '/access/crewweb/#/PublishedRoster'
+                      menuIconContextPath: /access/crewweb/access/icons/access.svg
+                      menuIconId: question-mark_outlined_24
+                      menuSortOrderIndex: 10
+            text/html:
+              schema:
+                type: object
+                properties: {}
       servers:
-      - url: https://192.168.1.52:20602
+        - url: 'https://192.168.1.52:20602'
+      operationId: active
+      tags:
+        - start
     servers:
-    - url: https://192.168.1.52:20602
+      - url: 'https://192.168.1.52:20602'
   /access/rs/crew/notification:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Returns all non acknowledged notifications for a crew member.
       responses:
-        "200":
-          description: Auto generated using Swagger Inspector
+        '200':
+          description: '4072 advertises a trip, grabbed by 4456 causes this notification.'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_5'
               examples:
-                "0":
-                  value: '{"entity":[],"links":[]}'
+                'OTS crewid: 4072 Oct 2018':
+                  value:
+                    entity:
+                      - notificationId: "AdDVP/meSZir1\\+gfIbDFzg==+XacIhiVIQdyrZPgcshLBFQ=="
+                        crewId: '4072'
+                        st: '2018-10-30T05:20:00Z'
+                        et: '2018-10-30T10:50:00Z'
+                        text: 'Deassigned trip 614042 - 1 day, 30OCT 06:20 - 11:50'
+                        type: DEASSIGNED_TRIP
+                    links: []
       servers:
-      - url: https://192.168.1.52:20602
+        - url: 'https://192.168.1.52:20602'
+      operationId: notification
+      tags:
+        - notification
     servers:
-    - url: https://192.168.1.52:20602
+      - url: 'https://192.168.1.52:20602'
 components:
   schemas:
     inline_response_200:
@@ -454,6 +1759,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/accessrsaccessflightlogsave_landings'
+      x-examples: {}
     body_1:
       type: object
       properties:
