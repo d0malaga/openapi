@@ -33,6 +33,7 @@ paths:
       operationId: acknowledge
       tags:
         - notification
+      summary: Acknowledge notifications
     servers:
       - url: 'https://192.168.1.52:20602'
   /access/rs/portal/userdata:
@@ -53,6 +54,7 @@ paths:
       operationId: userdata
       tags:
         - start
+      summary: Get userdata
     servers:
       - url: 'https://192.168.1.52:20602'
   '/access/rs/crew/{crewid}/info/':
@@ -73,6 +75,7 @@ paths:
       operationId: crew-info
       tags:
         - start
+      summary: Get crew info
     servers:
       - url: 'https://192.168.1.52:20602'
     parameters:
@@ -1334,6 +1337,7 @@ paths:
       operationId: roster
       tags:
         - start
+      summary: Get roster
     servers:
       - url: 'https://192.168.1.52:20602'
   /access/rs/access/flightlog/find:
@@ -1355,6 +1359,7 @@ paths:
       operationId: flightlog-find
       tags:
         - flightlog
+      summary: Read flightlog
     servers:
       - url: 'https://192.168.1.52:20602'
   /access/rs/system/time:
@@ -1375,6 +1380,7 @@ paths:
       operationId: time
       tags:
         - start
+      summary: Get UTC offsets
     servers:
       - url: 'https://192.168.1.52:20602'
   /access/rs/access/flightlog/save:
@@ -1396,6 +1402,7 @@ paths:
       operationId: flightlog-save
       tags:
         - flightlog
+      summary: Save flightlog
     servers:
       - url: 'https://192.168.1.52:20602'
   /access/rs/modules/active:
@@ -1438,6 +1445,7 @@ paths:
       operationId: active
       tags:
         - start
+      summary: Read initial application data
     servers:
       - url: 'https://192.168.1.52:20602'
   /access/rs/crew/notification:
@@ -1466,6 +1474,7 @@ paths:
       operationId: notification
       tags:
         - notification
+      summary: Get non acknowledged notifications
     servers:
       - url: 'https://192.168.1.52:20602'
 components:
@@ -1709,51 +1718,6 @@ components:
                     type: string
                   end:
                     type: string
-    request_save_flightlog:
-      type: object
-      properties:
-        entries:
-          type: array
-          items:
-            type: object
-            properties:
-              takeoffs:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    pilot:
-                      type: object
-                      properties:
-                        crewId:
-                          type: string
-                    attempts:
-                      type: string
-              pilotInCommand:
-                type: object
-                properties:
-                  crewId:
-                    type: string
-              startTime:
-                type: string
-              descriptor:
-                type: string
-              landings:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    pilot:
-                      type: object
-                      properties:
-                        crewId:
-                          type: string
-                    visibility:
-                      type: string
-                    attempts:
-                      type: string
-        tripKey:
-          $ref: '#/components/schemas/request_flightlog'
     response_active_200:
       type: object
       properties:
@@ -2028,3 +1992,48 @@ components:
           type: string
         fingerprint:
           type: string
+    request_save_flightlog:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            properties:
+              takeoffs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    pilot:
+                      type: object
+                      properties:
+                        crewId:
+                          type: string
+                    attempts:
+                      type: string
+              pilotInCommand:
+                type: object
+                properties:
+                  crewId:
+                    type: string
+              startTime:
+                type: string
+              descriptor:
+                type: string
+              landings:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    pilot:
+                      type: object
+                      properties:
+                        crewId:
+                          type: string
+                    visibility:
+                      type: string
+                    attempts:
+                      type: string
+            type: object
+        tripKey:
+          $ref: '#/components/schemas/request_flightlog'
