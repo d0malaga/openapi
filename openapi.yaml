@@ -24,7 +24,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/response_acknowledge_200'
               examples:
                 '0':
                   value: '{"entity":true,"links":[]}'
@@ -44,7 +44,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/response_userdata_200'
               examples:
                 '0':
                   value: '{"features":["exchange:tradecart.drop","exchange:tradecart.un_advertise","exchange:tradecart.swap","exchange:tradecart.give","exchange:tradecart.pickup","exchange:tradecart.advertise","exchange:tradecart.shift","report:report_sources.reference_roster","flightSearch","report:report_sources.advertisement_crew_web","exchange:tradecart.simple_split","volunteerWrite","checkin","exchange:tradecart.split","exchange:show_exchange","exchange:tradecart.multi_shift","exchange:tradecart.direct_trade","report:report_sources.trip_information_web","exchange:tradecart.grab","report:report_sources.roster_published_crewaccess","exchange:tradecart.trade"],"role":"crew_fc","webapplications":["exchange:tradecart.drop","exchange:tradecart.un_advertise","exchange:tradecart.swap","exchange:tradecart.give","exchange:tradecart.pickup","exchange:tradecart.advertise","exchange:tradecart.shift","report:report_sources.reference_roster","flightSearch","report:report_sources.advertisement_crew_web","exchange:tradecart.simple_split","volunteerWrite","checkin","exchange:tradecart.split","exchange:show_exchange","exchange:tradecart.multi_shift","exchange:tradecart.direct_trade","report:report_sources.trip_information_web","exchange:tradecart.grab","report:report_sources.roster_published_crewaccess","exchange:tradecart.trade"],"maxInactiveInterval":1800,"crewId":"1773","attributes":{"crewIdentity":["1773"]},"serverTime":1581808394852,"user":"1773"}'
@@ -64,7 +64,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_2'
+                $ref: '#/components/schemas/response_crewinfo_200'
               examples:
                 '0':
                   value: '{"entity":{"bases":[],"ranks":[],"areas":[],"contracts":[],"travelDocument":[{"info":{"documentCategory":"PASSPORT","documentType":"PASSPORT","expiryDate":"2020-08-12","documentNumber":"JP455318","countryCode":"CH","surname":"Lancaster","givenNames":"Peter"},"attachment":[]}],"document":[{"name":"ATPL","validFrom":"1998-07-10T00:00:00Z","validTo":"2037-01-01T00:00:00Z"}],"qualification":[{"name":"EMJ","group":"AIRCRAFT","validFrom":"2005-12-21T23:00:00Z","validTo":"2016-08-07T22:00:00Z","validityState":"expired"},{"name":"EMJ","group":"AIRCRAFT","validFrom":"2016-08-07T22:00:00Z"},{"name":"TRI","group":"INSTRUCTOR","validFrom":"2016-11-04T23:00:00Z","validTo":"2099-12-31T00:00:00Z"}],"additionalInfo":[],"address":[{"which":"home","street":"Schönbergweg 1","city":"Bern","zipCode":"1957","country":"CH","validFrom":"2010-08-29T00:00:00Z"}],"email":[{"isEditable":false,"which":"work","contact":"Peter.Lancaster@jeppesen.com","priority":1,"validFrom":"2011-05-01T00:00:00Z"}],"primaryPhone":{"isEditable":false,"which":"work","contact":"025950119","priority":1,"validFrom":"2012-07-25T00:00:00Z"},"secondaryPhone":{"isEditable":false,"which":"home","contact":"049849425","priority":2,"validFrom":"2010-08-19T00:00:00Z"},"temporaryPhone":{"isEditable":true},"restriction":[],"fleetQualifications":[],"crewPositions":["CP","FO"],"crewId":"1773","surname":"Lancaster","givenNames":"Peter","base":"ZRH","company":"Atlantis","employmentNumber":"JP1773","birthDay":"1964-03-18","birthCity":"Bern","gender":"F","companySeniority":"5981","crewFunction":"CP","crewCategory":"FC"},"links":[]}'
@@ -90,8 +90,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                $ref: '#/components/schemas/response_roster_200'
               examples:
                 'OTS crewid: 4456 Oct 2018':
                   value:
@@ -1344,7 +1343,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body'
+              $ref: '#/components/schemas/request_flightlog'
             examples:
               '0':
                 value: '{"dor":"01OCT2018","name":"901479","role":"CP","fingerprint":"d875f7a3"}'
@@ -1367,7 +1366,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_3'
+                $ref: '#/components/schemas/response_time_200'
               examples:
                 '0':
                   value: '{"currentTime":"2018-10-04T09:14:00Z","homeBaseOffset":{"offsetPeriods":[{"start":"2017-03-26T01:00:00Z","end":"2017-10-29T02:00:00Z","utcOffset":120},{"start":"2018-03-25T01:00:00Z","end":"2018-10-28T02:00:00Z","utcOffset":120},{"start":"2019-03-31T01:00:00Z","end":"2019-10-27T02:00:00Z","utcOffset":120}],"stdOffset":60}}'
@@ -1385,7 +1384,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_1'
+              $ref: '#/components/schemas/request_save_flightlog'
             examples:
               '0':
                 value: '{"tripKey":{"dor":"01OCT2018","name":"901479","role":"CP","fingerprint":"d875f7a3"},"entries":[{"startTime":"2018-10-01T05:36:00Z","landings":[{"attempts":"2","pilot":{"crewId":"1773"},"visibility":"CAT3"}],"takeoffs":[{"attempts":"1","pilot":{"crewId":"1773"}}],"descriptor":"JP1678","pilotInCommand":{"crewId":"1773"}},{"startTime":"2018-10-01T08:02:00Z","landings":[],"takeoffs":[],"descriptor":"JP1679","pilotInCommand":{"crewId":"1773"}},{"startTime":"2018-10-01T10:21:00Z","landings":[{"attempts":"1","pilot":{"crewId":"1773"}}],"takeoffs":[],"descriptor":"JP2824","pilotInCommand":{"crewId":"1773"}},{"startTime":"2018-10-02T04:57:00Z","landings":[],"takeoffs":[],"descriptor":"JP2042"},{"startTime":"2018-10-02T07:32:00Z","landings":[{"attempts":"1","pilot":{"crewId":"1773"}}],"takeoffs":[],"descriptor":"JP2043"},{"startTime":"2018-10-03T05:25:00Z","landings":[],"takeoffs":[{"attempts":"1","pilot":{"crewId":"1773"}}],"descriptor":"JP1430","pilotInCommand":{"crewId":"1773"}},{"startTime":"2018-10-03T08:21:00Z","landings":[],"takeoffs":[],"descriptor":"JP1431"},{"startTime":"2018-10-04T03:57:00Z","landings":[],"takeoffs":[],"descriptor":"JP2801"},{"startTime":"2018-10-04T06:28:00Z","landings":[],"takeoffs":[],"descriptor":"JP1484"},{"startTime":"2018-10-04T08:33:00Z","landings":[],"takeoffs":[],"descriptor":"JP1485"}]}'
@@ -1408,7 +1407,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_4'
+                $ref: '#/components/schemas/response_active_200'
               examples:
                 '0':
                   value: '{"access":{"moduleName":"access","displayName":"Roster","entryPointContextPath":"/access/crewweb/#/PublishedRoster","menuIconContextPath":"/access/crewweb/access/icons/access.svg","menuIconId":"question-mark_outlined_24","menuSortOrderIndex":10}}'
@@ -1450,7 +1449,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_5'
+                $ref: '#/components/schemas/response_notification_200'
               examples:
                 'OTS crewid: 4072 Oct 2018':
                   value:
@@ -1471,7 +1470,7 @@ paths:
       - url: 'https://192.168.1.52:20602'
 components:
   schemas:
-    inline_response_200:
+    response_acknowledge_200:
       type: object
       properties:
         links:
@@ -1480,7 +1479,7 @@ components:
             type: string
         entity:
           type: boolean
-    inline_response_200_1:
+    response_userdata_200:
       type: object
       properties:
         features:
@@ -1508,7 +1507,7 @@ components:
           type: number
         user:
           type: string
-    inline_response_200_2:
+    response_crewinfo_200:
       type: object
       properties:
         links:
@@ -1689,18 +1688,7 @@ components:
                   type: integer
             base:
               type: string
-    body:
-      type: object
-      properties:
-        role:
-          type: string
-        dor:
-          type: string
-        name:
-          type: string
-        fingerprint:
-          type: string
-    inline_response_200_3:
+    response_time_200:
       type: object
       properties:
         currentTime:
@@ -1721,55 +1709,52 @@ components:
                     type: string
                   end:
                     type: string
-    accessrsaccessflightlogsave_pilot:
-      type: object
-      properties:
-        crewId:
-          type: string
-    accessrsaccessflightlogsave_takeoffs:
-      type: object
-      properties:
-        pilot:
-          $ref: '#/components/schemas/accessrsaccessflightlogsave_pilot'
-        attempts:
-          type: string
-    accessrsaccessflightlogsave_landings:
-      type: object
-      properties:
-        pilot:
-          $ref: '#/components/schemas/accessrsaccessflightlogsave_pilot'
-        visibility:
-          type: string
-        attempts:
-          type: string
-    accessrsaccessflightlogsave_entries:
-      type: object
-      properties:
-        takeoffs:
-          type: array
-          items:
-            $ref: '#/components/schemas/accessrsaccessflightlogsave_takeoffs'
-        pilotInCommand:
-          $ref: '#/components/schemas/accessrsaccessflightlogsave_pilot'
-        startTime:
-          type: string
-        descriptor:
-          type: string
-        landings:
-          type: array
-          items:
-            $ref: '#/components/schemas/accessrsaccessflightlogsave_landings'
-      x-examples: {}
-    body_1:
+    request_save_flightlog:
       type: object
       properties:
         entries:
           type: array
           items:
-            $ref: '#/components/schemas/accessrsaccessflightlogsave_entries'
+            type: object
+            properties:
+              takeoffs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    pilot:
+                      type: object
+                      properties:
+                        crewId:
+                          type: string
+                    attempts:
+                      type: string
+              pilotInCommand:
+                type: object
+                properties:
+                  crewId:
+                    type: string
+              startTime:
+                type: string
+              descriptor:
+                type: string
+              landings:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    pilot:
+                      type: object
+                      properties:
+                        crewId:
+                          type: string
+                    visibility:
+                      type: string
+                    attempts:
+                      type: string
         tripKey:
-          $ref: '#/components/schemas/body'
-    inline_response_200_4:
+          $ref: '#/components/schemas/request_flightlog'
+    response_active_200:
       type: object
       properties:
         access:
@@ -1787,14 +1772,259 @@ components:
               type: string
             menuIconContextPath:
               type: string
-    inline_response_200_5:
+    response_notification_200:
       type: object
       properties:
-        links:
-          type: array
-          items:
-            type: string
         entity:
           type: array
           items:
-            type: string
+            type: object
+            properties:
+              notificationId:
+                type: string
+              crewId:
+                type: string
+              st:
+                type: string
+              et:
+                type: string
+              text:
+                type: string
+              type:
+                type: string
+        links:
+          type: array
+          items:
+            type: object
+    response_roster_200:
+      type: object
+      properties:
+        entity:
+          type: object
+          properties:
+            customAttributes:
+              type: array
+              items:
+                type: object
+            activities:
+              type: array
+              items:
+                type: object
+                properties:
+                  customAttributes:
+                    type: array
+                    items:
+                      type: object
+                  annotations:
+                    type: array
+                    items:
+                      type: object
+                  startStation:
+                    type: string
+                  endStation:
+                    type: string
+                  startTime:
+                    type: string
+                  endTime:
+                    type: string
+                  startTimeOffset:
+                    type: number
+                  endTimeOffset:
+                    type: number
+                  duration:
+                    type: number
+                  durationMinutes:
+                    type: number
+                  isWholeDayActivity:
+                    type: boolean
+                  fingerprint:
+                    type: string
+                  key:
+                    type: object
+                    properties:
+                      dor:
+                        type: string
+                      name:
+                        type: string
+                      role:
+                        type: string
+                      fingerprint:
+                        type: string
+                  base:
+                    type: object
+                    properties:
+                      stations:
+                        type: array
+                        items:
+                          type: string
+                      id:
+                        type: string
+                  duties:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        customAttributes:
+                          type: array
+                          items:
+                            type: object
+                        annotations:
+                          type: array
+                          items:
+                            type: object
+                        startStation:
+                          type: string
+                        endStation:
+                          type: string
+                        startTime:
+                          type: string
+                        endTime:
+                          type: string
+                        startTimeOffset:
+                          type: number
+                        endTimeOffset:
+                          type: number
+                        duration:
+                          type: number
+                        durationMinutes:
+                          type: number
+                        isWholeDayActivity:
+                          type: boolean
+                        id:
+                          type: number
+                        length:
+                          type: number
+                        time:
+                          type: number
+                        timeMinutes:
+                          type: number
+                        type:
+                          type: string
+                  activities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        customAttributes:
+                          type: array
+                          items:
+                            type: object
+                        annotations:
+                          type: array
+                          items:
+                            type: object
+                        startStation:
+                          type: string
+                        endStation:
+                          type: string
+                        startTime:
+                          type: string
+                        endTime:
+                          type: string
+                        startTimeOffset:
+                          type: number
+                        endTimeOffset:
+                          type: number
+                        duration:
+                          type: number
+                        durationMinutes:
+                          type: number
+                        isWholeDayActivity:
+                          type: boolean
+                        fingerprint:
+                          type: string
+                        trainingTags:
+                          type: array
+                          items:
+                            type: object
+                        dutyId:
+                          type: number
+                        type:
+                          type: string
+                  openPositions:
+                    type: array
+                    items:
+                      type: object
+                  labels:
+                    type: array
+                    items:
+                      type: object
+                  area:
+                    type: string
+                  blockTimeMinutes:
+                    type: number
+                  dutyTime:
+                    type: number
+                  dutyTimeMinutes:
+                    type: number
+                  endOfLegalRest:
+                    type: string
+                  endOfLegalRestOffset:
+                    type: number
+                  isTraining:
+                    type: boolean
+                  isCharter:
+                    type: boolean
+                  isSplit:
+                    type: boolean
+                  fleetType:
+                    type: string
+                  advertisements:
+                    type: array
+                    items:
+                      type: object
+                  isReserveAssigned:
+                    type: boolean
+                  patchTime:
+                    type: string
+                  type:
+                    type: string
+            periods:
+              type: array
+              items:
+                type: object
+                properties:
+                  customAttributes:
+                    type: array
+                    items:
+                      type: object
+                  index:
+                    type: number
+                  name:
+                    type: string
+                  startTime:
+                    type: string
+                  endTime:
+                    type: string
+                  currentBlockTime:
+                    type: number
+                  currentDutyCreditTime:
+                    type: number
+                  totalBlockTime:
+                    type: number
+                  totalDutyCreditTime:
+                    type: number
+                  originalBlockTime:
+                    type: number
+                  originalDutyCreditTime:
+                    type: number
+                  isCabin:
+                    type: boolean
+            crewId:
+              type: string
+        links:
+          type: array
+          items:
+            type: object
+      description: 'The json object representing a roster, including custom attributes and all crew on all flights'
+    request_flightlog:
+      type: object
+      properties:
+        role:
+          type: string
+        dor:
+          type: string
+        name:
+          type: string
+        fingerprint:
+          type: string
